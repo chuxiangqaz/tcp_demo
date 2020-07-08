@@ -8,6 +8,11 @@
 #define BUF_SIZE 1024
 void error_handling(char *message);
 
+/**
+ * 
+ * socket 回声服务器服务端
+ * 
+ */
 int main(int argc, char *argv[])
 {
 	// 服务端socket（相当于门卫）
@@ -22,6 +27,7 @@ int main(int argc, char *argv[])
 	socklen_t clnt_addr_size;
 	int str_len, i;
 	
+	// 声明并初始化一个字符数组
 	char message[] = "Hello Word!";
 	
 	if (argc != 2) 
@@ -53,6 +59,8 @@ int main(int argc, char *argv[])
 	}
 	
 	clnt_addr_size = sizeof(clnt_addr);
+
+	// 服务器依次向5个客户端提供服务器并推出
 	for (i = 0; i < 5; i++)
 	{
 		clnt_socket = accept(serv_socket, (struct sockaddr*)&clnt_addr, &clnt_addr_size);
@@ -65,7 +73,8 @@ int main(int argc, char *argv[])
 
 		while ((str_len=read(clnt_socket, message, BUF_SIZE)) != 0)
 		{
-			printf("服务器收到的长度 %d，内容为：%s 完了",str_len, message);
+			//int len = strlen(message);
+			//printf("服务器收到的长度 %d，message长度为：%d 完了\n",str_len, len);
 			write(clnt_socket, message, str_len);
 		}
 

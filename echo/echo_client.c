@@ -9,6 +9,11 @@
 #define BUF_SIZE 1024
 void error_handling(char *message);
 
+/**
+ * 
+ * socket 回声服务器客户端
+ * 
+ */
 int main(int argc, char* argv[])
 {
 	int sock;
